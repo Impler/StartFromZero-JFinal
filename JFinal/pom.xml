@@ -5,7 +5,7 @@
   <groupId>com.study</groupId>
   <artifactId>JFinal</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>JFinal</name>
   <url>http://maven.apache.org</url>
