@@ -132,6 +132,15 @@
 					</ul>
 				</div>
 			</li>
+			<li>
+				<h2>ActiveRecord</h2>
+				<div>
+					<p>ActiveRecord 是 JFinal 最核心的组成部分之一，通过 ActiveRecord 来操作数据库， 将极大
+						地减少代码量，极大地提升开发效率。 ActiveRecord 是作为 JFinal 的 Plugin 而存在的，所以使用时需要在
+						JFinalConfig 中配置 ActiveRecordPlugin。
+					</p>
+				</div>
+			</li>
 		</ol>
 	</div>
 	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>

@@ -6,12 +6,15 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.study.jfinal.controller.ActionController;
 import com.study.jfinal.controller.HelloController;
 import com.study.jfinal.controller.InterceptrController;
 import com.study.jfinal.interceptor.controller.GlobalControllerInterceptor;
 import com.study.jfinal.interceptor.service.GlobalServiceInterceptor;
+import com.study.jfinal.model.User;
 import com.study.jfinal.router.IndexRouter;
 
 public class JFinalProjectConfig extends JFinalConfig {
@@ -43,7 +46,19 @@ public class JFinalProjectConfig extends JFinalConfig {
 
 	@Override
 	public void configPlugin(Plugins me) {
-		// TODO Auto-generated method stub
+		loadPropertyFile("db.properties");
+		
+		// C3P0数据库连接池插件
+		C3p0Plugin cp = new C3p0Plugin(super.getProperty("jdbc.url"),
+				super.getProperty("jdbc.username"),
+				super.getProperty("jdbc.password"));
+		me.add(cp);
+		
+		// ActiveRecrod支持插件
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
+		// 表名、主键名默认id、Model Class对象
+		arp.addMapping("t_user", User.class);
+		me.add(arp);
 
 	}
 
