@@ -44,11 +44,13 @@
 								getParaNames 分别对应 HttpServletRequest 的 getParameterMap 与
 								getParameterNames。</p>
 							<div>
-								<form id="paraForm" method="post">
+								<!-- action改为action/param?param_1=p1，urlPara将取不到 -->
+								<form id="paraForm" action="action/param?param_1=p1">
 									<label>param1:</label><input type="text" id="param-param1" name="param1"/> <br />
 									<label>param2:</label><input type="text" id="param-param2" name="param2"/> <br />
 									<label>param3(数字):</label><input type="number" id="param-param3" name="param3"/> <br />
-									<input type="button" value="test" id="paraButton"/>
+									<input type="button" value="get" id="paraGetButton" class="paraButton"/>
+									<input type="button" value="post" id="paraPostButton" class="paraButton"/>
 								</form>
 							</div>
 						</li>
@@ -58,9 +60,35 @@
 								对象，表单域名称以”modelName.attrName”方式命名。 除了 getModel 以外， 还提供了一个
 								getBean 方法用于支持传统的 Java Bean。<br/></p>
 							<div>
-								<form id="modelForm" method="post" action="action/model">
-									<label>书名:</label><input type="text" name="book.name"/> <br />
-									<label>作者:</label><input type="text" name="book.author"/> <br />
+								<form id="modelForm" action="action/bean">
+									<label>书名book.name:</label><input type="text" name="book.name"/> <br />
+									<label>作者book.author:</label><input type="text" name="book.author"/> <br />
+									<label>书名bk.name:</label><input type="text" name="bk.name"/> <br />
+									<label>作者bk.author:</label><input type="text" name="bk.author"/> <br />
+									<input type="submit" value="test" />
+								</form>
+							</div>
+						</li>
+						<li>
+							<h3>setAttr方法</h3>
+							<p>setAttr(String, Object)转调了
+								HttpServletRequest.setAttribute(String, Object)，该方法可以将各种数据传递给
+								View 并在 View 中显示出来。</p>
+							<div>
+								<form action="action/setAttr">
+									<label>attr:</label><input type="text" name="attr"/> <br />
+									<input type="submit" value="test" />
+								</form>
+							</div>
+						</li>
+						<li>
+							<h3>session 操作方法</h3>
+							<p>通过 setSessionAttr(key, value)可以向 session
+								中存放数据，getSessionAttr(key)可以从 session 中读取数据。 还可以通过 getSession()得到
+								session 对象从而使用全面的 session API。</p>
+							<div>
+								<form action="action/session">
+									<label>attr:</label><input type="text" name="attr"/> <br />
 									<input type="submit" value="test" />
 								</form>
 							</div>
@@ -68,14 +96,52 @@
 					</ol>
 				</div>
 			</li>
+			<li>
+				<h2>Interceptor</h2>
+				<div>
+					<p>
+						实现com.jfinal.aop.Interceptor即可作为JFinal拦截器。从代码实现上拦截器之间没有太大不同，但从意义和作用上分为控制层拦截器和业务层拦截器，<br />
+						作用于任意controller(继承com.jfinal.core.Controller)类的拦截器称为控制层拦截器；作用于任意service(任意java类)类的拦截器称为业务层控制器。<br />
+						控制层拦截器的触发， 只需发起 action 请求即可。业务层拦截器的触发需要先使用 enhance方法对目标对象进行增强， 然后调用目标方法即可. 详见Duang、 Enhancer帮助类 <br />
+						无论控制层还是业务层，按照拦截对象，拦截器又可以分为全局拦截器、类拦截器、方法拦截器、Inject拦截器。<br />
+						全局控制器：作用于控制层或业务层的所有类的所有方法，在JFinalConfig中注册全局注册器<br />
+						类拦截器：作用于控制层或业务层的所有方法 ，在具体类上通过@Before注解配置拦截器<br />
+						方法拦截器：作用于指定的方法， 在具体方法上通过@Before注解配置拦截器<br />
+						Inject拦截器：在使用 enhance 或 duang 方法增强时使用参数传入的拦截器。 Inject 可以对目标完全无侵入地应用 AOP。 即不需要使用@Before注解。Inject拦截器作用于被拦截类的所有方法，与类拦截器同级别，只不过先与类拦截器执行<br />
+						拦截器各级别执行的次序依次为： Global、Inject、 Class、 Method，如果同级中有多个拦截器，那么同级中的执行次序是： 配置在前面的先执行
+					</p>
+					<ul>
+						<li>
+							<h3>控制层拦截器</h3>
+							<div>
+								<a href="interceptor">类拦截器</a> <a href="interceptor/other">方法拦截器</a> <a href="interceptor/clear">清除拦截器</a>
+							</div>
+						</li>
+						<li>
+							<h3>业务层拦截器</h3>
+							<div>
+								<a href="interceptor/service">业务层拦截器</a>
+							</div>
+						</li>
+						<li>
+							<h3>Inject拦截器</h3>
+							<div>
+								<a href="interceptor/inject">Inject拦截器</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</li>
 		</ol>
 	</div>
 	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$("#paraButton").click(function(){
+			$(".paraButton").click(function(){
 				var urlParam = $('#param-param1').val() + "-" + $("#param-param2").val();
-				$("#paraForm").attr("action", "action/param/" + urlParam);
+				var action = $("#paraForm").attr('action') + "/" + urlParam;
+				$("#paraForm").attr("method", $(this).val());
+				$("#paraForm").attr("action", action);
 				$("#paraForm").submit();
 			});
 		});

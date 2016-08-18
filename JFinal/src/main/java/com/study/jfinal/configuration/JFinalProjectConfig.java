@@ -9,6 +9,9 @@ import com.jfinal.config.Routes;
 import com.jfinal.render.ViewType;
 import com.study.jfinal.controller.ActionController;
 import com.study.jfinal.controller.HelloController;
+import com.study.jfinal.controller.InterceptrController;
+import com.study.jfinal.interceptor.controller.GlobalControllerInterceptor;
+import com.study.jfinal.interceptor.service.GlobalServiceInterceptor;
 import com.study.jfinal.router.IndexRouter;
 
 public class JFinalProjectConfig extends JFinalConfig {
@@ -33,6 +36,8 @@ public class JFinalProjectConfig extends JFinalConfig {
 		me.add("/hello", HelloController.class);
 		// 注册路径与Controller的映射
 		me.add("/action", ActionController.class, "/view/jsp/action");
+		
+		me.add("/interceptor", InterceptrController.class);
 
 	}
 
@@ -42,10 +47,15 @@ public class JFinalProjectConfig extends JFinalConfig {
 
 	}
 
+	/**
+	 * 注册全局拦截器，包括控制层全局烂机器和业务层全局拦截器
+	 */
 	@Override
 	public void configInterceptor(Interceptors me) {
-		// TODO Auto-generated method stub
-
+		// 注册全局控制层拦截器
+		me.addGlobalActionInterceptor(new GlobalControllerInterceptor());
+		// 注册全局业务层拦截器
+		me.addGlobalServiceInterceptor(new GlobalServiceInterceptor());
 	}
 
 	@Override
