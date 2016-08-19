@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Param</title>
+<%@include file="../common/base.jsp" %>
+<title>结果页</title>
 </head>
 <body>
-${requestScope.param1 }
+<h2>${requestScope.result.msg }</h2>
+<a href="user/add">继续添加</a> <a href="user/queryAll">查询全部</a>
 </body>
 </html>

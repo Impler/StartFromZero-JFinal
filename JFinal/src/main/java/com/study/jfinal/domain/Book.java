@@ -1,5 +1,10 @@
 package com.study.jfinal.domain;
 
+/**
+ * 普通的POJO，对比com.study.jfinal.activerecord.domain.User看下
+ * @author impler
+ *
+ */
 public class Book {
 
 	// 书名

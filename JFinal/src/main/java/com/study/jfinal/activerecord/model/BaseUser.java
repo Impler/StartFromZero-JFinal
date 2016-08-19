@@ -1,4 +1,4 @@
-package com.study.jfinal.model;
+package com.study.jfinal.activerecord.model;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;

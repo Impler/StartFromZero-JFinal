@@ -56,17 +56,36 @@
 						</li>
 						<li>
 							<h3>getModel 与 getBean 系列方法</h3>
-							<p>getModel 用来接收页面表单域传递过来的 model
+							<p>getModel 用来接收页面表单域传递过来的 model(com.jfinal.plugin.activerecord.Model)
 								对象，表单域名称以”modelName.attrName”方式命名。 除了 getModel 以外， 还提供了一个
 								getBean 方法用于支持传统的 Java Bean。<br/></p>
 							<div>
-								<form id="modelForm" action="action/bean">
-									<label>书名book.name:</label><input type="text" name="book.name"/> <br />
-									<label>作者book.author:</label><input type="text" name="book.author"/> <br />
-									<label>书名bk.name:</label><input type="text" name="bk.name"/> <br />
-									<label>作者bk.author:</label><input type="text" name="bk.author"/> <br />
-									<input type="submit" value="test" />
-								</form>
+								<ul>
+									<li>
+										<h4>getBean</h4>
+										<div>
+											<form id="beanForm" action="action/bean">
+												<label>书名book.name:</label><input type="text" name="book.name"/> <br />
+												<label>作者book.author:</label><input type="text" name="book.author"/> <br />
+												<label>书名bk.name:</label><input type="text" name="bk.name"/> <br />
+												<label>作者bk.author:</label><input type="text" name="bk.author"/> <br />
+												<input type="submit" value="test" />
+											</form>
+										</div>
+									</li>
+									<li>
+										<h4>getModel</h4>
+										<div>
+											<form id="modelForm" action="action/model">
+												<label>用户名user.username:</label><input type="text" name="user.username"/> <br />
+												<label>邮箱user.email:</label><input type="text" name="user.email"/> <br />
+												<label>用户名u.username:</label><input type="text" name="u.username"/> <br />
+												<label>邮箱u.email:</label><input type="text" name="u.email"/> <br />
+												<input type="submit" value="test" />
+											</form>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</li>
 						<li>
@@ -139,6 +158,12 @@
 						地减少代码量，极大地提升开发效率。 ActiveRecord 是作为 JFinal 的 Plugin 而存在的，所以使用时需要在
 						JFinalConfig 中配置 ActiveRecordPlugin。
 					</p>
+					<ul>
+						<li><h3>Model</h3>
+							<div><a href="user">测试</a></div>
+						</li>
+						<li><h3>Model</h3></li>
+					</ul>
 				</div>
 			</li>
 		</ol>

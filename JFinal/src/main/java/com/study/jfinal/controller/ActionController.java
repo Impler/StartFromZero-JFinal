@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import com.jfinal.core.Controller;
+import com.study.jfinal.activerecord.domain.User;
 import com.study.jfinal.domain.Book;
 
 /**
@@ -62,11 +63,22 @@ public class ActionController extends Controller {
 	}
 	
 	/**
+	 * model action
+	 */
+	public void model(){
+		// 表单项name为【User类首字母小写.属性名】形式，如user.username
+		User user1 = super.getModel(User.class);
+		// 表单项name为【自定义前缀.属性名】，如u.username
+		User user2 = super.getBean(User.class, "u");
+		
+		super.renderText(user1.toString() + "," + user2.toString());
+	}
+	
+	/**
 	 * bean action 
-	 * TODO model
 	 */
 	public void bean(){
-		// 表单项name为【Book类首字母小写.属性名】形式
+		// 表单项name为【Book类首字母小写.属性名】形式，如book.name
 		Book book1 = super.getBean(Book.class);
 		// 表单项name为【自定义前缀.属性名】，如bk.name
 		Book book2 = super.getBean(Book.class, "bk");

@@ -1,4 +1,4 @@
-package com.study.jfinal.domain;
+package com.study.jfinal.activerecord.domain;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 

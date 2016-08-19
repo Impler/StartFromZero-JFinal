@@ -9,12 +9,13 @@ import com.jfinal.config.Routes;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.study.jfinal.activerecord.domain.User;
 import com.study.jfinal.controller.ActionController;
+import com.study.jfinal.controller.ActiveRecordController;
 import com.study.jfinal.controller.HelloController;
 import com.study.jfinal.controller.InterceptrController;
 import com.study.jfinal.interceptor.controller.GlobalControllerInterceptor;
 import com.study.jfinal.interceptor.service.GlobalServiceInterceptor;
-import com.study.jfinal.model.User;
 import com.study.jfinal.router.IndexRouter;
 
 public class JFinalProjectConfig extends JFinalConfig {
@@ -41,6 +42,8 @@ public class JFinalProjectConfig extends JFinalConfig {
 		me.add("/action", ActionController.class, "/view/jsp/action");
 		
 		me.add("/interceptor", InterceptrController.class);
+		
+		me.add("/user", ActiveRecordController.class, "/view/jsp/activerecord");
 
 	}
 
@@ -56,6 +59,7 @@ public class JFinalProjectConfig extends JFinalConfig {
 		
 		// ActiveRecrod支持插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
+		arp.setShowSql(true);
 		// 表名、主键名默认id、Model Class对象
 		arp.addMapping("t_user", User.class);
 		me.add(arp);
