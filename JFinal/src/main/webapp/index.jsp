@@ -162,8 +162,25 @@
 						<li><h3>Model</h3>
 							<div><a href="user">测试</a></div>
 						</li>
-						<li><h3>Model</h3></li>
 					</ul>
+				</div>
+			</li>
+			<li>
+				<h2>Validator</h2>
+				<div>
+					<p>
+						Validator 是 JFinal 校验组件， 在 Validator 类中提供了非常方便的校验方法，学习简单，使
+						用方便。Validator 自身实现了 Interceptor 接口，所以它也是一个拦截器，配置方式与拦截器完全一 样。<br />
+						此外JFinal提供了防止重复提交的机制，
+						<ul>
+							<li>在跳转到页面之前，调用Controller的createToken()方法，在session中生成随机串。</li>
+							<li>在页面的表单中通过${token }生成随机串隐藏域。</li>
+							<li>在表单请求的Controller方法中调用Controller的validateToken方法验证token是否一致</li>
+							<li>*token的验证也可以放在Validator（Interceptor）中来实现</li>
+						</ul>
+						<a href="validator">测试</a> <br />
+					</p>
+
 				</div>
 			</li>
 		</ol>

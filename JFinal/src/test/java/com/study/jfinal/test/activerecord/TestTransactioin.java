@@ -49,6 +49,9 @@ public class TestTransactioin extends AbsBaseTest {
 	public void testGlobalTranctionInterceptor2(){
 		// web项目在JFinalConfig中配置，这里从代码中抠出来这样注册，测试用
 		// 这里拦截方法名中包含save、update的方法
+		// *************************************************
+		// 但是TxByMethodRegex也会拦截符合要求的非dao层（非jdbc操作）的方法
+		// *************************************************
 		InterceptorManager.me().addGlobalServiceInterceptor(new TxByMethodRegex("(.*save.*|.*update.*)"));
 		FooService service = Duang.duang(FooService.class);
 		// 受事务管理

@@ -14,6 +14,7 @@ import com.study.jfinal.controller.ActionController;
 import com.study.jfinal.controller.ActiveRecordController;
 import com.study.jfinal.controller.HelloController;
 import com.study.jfinal.controller.InterceptrController;
+import com.study.jfinal.controller.ValidatorController;
 import com.study.jfinal.interceptor.controller.GlobalControllerInterceptor;
 import com.study.jfinal.interceptor.service.GlobalServiceInterceptor;
 import com.study.jfinal.router.IndexRouter;
@@ -44,6 +45,8 @@ public class JFinalProjectConfig extends JFinalConfig {
 		me.add("/interceptor", InterceptrController.class);
 		
 		me.add("/user", ActiveRecordController.class, "/view/jsp/activerecord");
+		
+		me.add("/validator", ValidatorController.class, "/view/jsp/validator");
 
 	}
 
